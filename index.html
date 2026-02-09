@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="icon/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="icon/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="icon/apple-touch-icon.png">
+  <link rel="manifest" href="icon/site.webmanifest">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shevaara | Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #eb6ab8;
+      color: #ef9696;
+      overflow-x: hidden;
+    }
+    
+    nav {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      background-color: #faf1f9;
+      padding: 5px 20px;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    nav p {
+      margin: 0;
+    }
+
+    a:hover {
+      background-color: rgb(234, 136, 211);
+    }
+
+    img {
+      border-radius: 20px;
+      height: auto;
+      max-width: 100%;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #840a57;
+      font-weight: bold;
+      border-radius: 30px;
+      padding: 8px;
+      white-space: nowrap;
+    }
+    
+    .hero {
+      text-align: center;
+      padding: 100px 20px 80px;
+      background: #ebbfe0;
+      margin-top: 60px;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 span {
+      color: #671147;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 15px auto 30px;
+      font-size: 18px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .hero .btn {
+      display: inline-block;
+      background: #a31a71;
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 16px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .hero .btn:hover {
+      background: #7a1253;
+      transform: translateY(-2px);
+    }
+
+    .hero h3 {
+      color: #2e0721;
+      font-size: 18px;
+      margin: 15px auto;
+      max-width: 800px;
+    }
+
+    .hero h3 span {
+      color: #73044e;
+    }
+    
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 40px auto;
+      max-width: 90%;
+      padding: 30px 20px;
+      flex-wrap: wrap;
+      background: #ebbfe0;
+    }
+
+    .card {
+      flex: 1;
+      min-width: 200px;
+      max-width: 250px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(222, 2, 123, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .card .icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+      color: #a31a71;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+      color: #4d2a4a;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .features-section {
+      text-align: center;
+      padding: 60px 20px;
+      background-color: #ebbfe0;
+    }
+
+    .features-section h2 {
+      font-size: 40px;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 20px;
+    }
+
+    .features-section h2 span {
+      color: #621c59;
+    }
+
+    .feature-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 40px auto;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    }
+
+    .feature-card i {
+      font-size: 40px;
+      color: #a31a71;
+      margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .section-title {
+      font-size: 28px;
+      margin: 40px auto;
+      background-color: #a31a71;
+      border-radius: 20px;
+      color: #e5e9ee;
+      text-align: center;
+      padding: 15px 20px;
+      max-width: 700px;
+      width: 90%;
+    }
+
+    .tip-box, .how-it-works, .team-section {
+      background: rgb(221, 157, 212);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px auto;
+      box-shadow: 0 0 10px rgba(3, 3, 3, 0.05);
+      max-width: 90%;
+        border-left: 5px solid #a31a71; /* Adds visual accent */
+
+    }
+
+    .tip-box strong {
+      color: #d63384;
+    }
+
+    .how-it-works {
+      background-color: #ee92c6;
+    }
+
+    .team-section {
+      background-color: rgb(226, 155, 203);
+      text-align: center;
+    }
+
+    .team-section h3 {
+      color: #2e0721;
+      margin-bottom: 15px;
+    }
+
+    .team-section p {
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .team-section span {
+      color: #73044e;
+      font-style: italic;
+    }
+
+    .features-grid {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    #theme-toggle, #sos {
+      padding: 8px 15px;
+      border: none;
+      cursor: pointer;
+      background: #af3d8f;
+      color: rgb(92, 22, 57);
+      border-radius: 5px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    #theme-toggle:hover, #sos:hover {
+      background: #8d2d79;
+      transform: scale(1.05);
+    }
+
+    .footer {
+      background: linear-gradient(135deg, #a15d88, #600f45);
+      color: #fff;
+      padding: 40px 20px;
+      font-family: Arial, sans-serif;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      margin-bottom: 25px;
+      max-width: 1200px;
+      margin: 0 auto 25px;
+    }
+
+    .footer h3 {
+      color: #fff;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .footer h4 {
+      margin-bottom: 12px;
+      color: #ffd6f0;
+      font-size: 18px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links ul li {
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 15px;
+      transition: color 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .footer-links a:hover {
+      color: #f19fd3;
+      transform: translateX(5px);
+    }
+
+    .footer-contacts p {
+      margin: 6px 0;
+      font-size: 15px;
+    }
+
+    .footer-contacts .red { color: #ff4d4d; font-weight: bold; }
+    .footer-contacts .pink { color: #ffd6f0; font-weight: bold; }
+    .footer-contacts .green { color: #9ce3e3; font-weight: bold; }
+    .footer-contacts .blue { color: #99ccff; font-weight: bold; }
+
+    .footer-social a {
+      display: inline-block;
+      margin: 0 8px;
+      font-size: 20px;
+      color: #fff;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .footer-social a:hover {
+      color: #f3b2db;
+      transform: scale(1.2);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 12px;
+      text-align: center;
+      font-size: 14px;
+      color: #eee;
+    }
+
+    .footer-bottom a {
+      color: #ffd6f0;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .footer-bottom a:hover {
+      text-decoration: underline;
+    }
+
+    #chat-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 320px;
+      max-width: calc(100vw - 40px);
+      max-height: 420px;
+      background: #fff0f6;
+      border-radius: 15px;
+      border: 2px solid #a62d8a;
+      box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 9999;
+    }
+
+    #chat-header {
+      background: #91308f;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+
+    .user-msg { 
+      color: #74495f; 
+      margin: 6px 0; 
+    }
+
+    .ai-msg { 
+      color: #333; 
+      background: #ffe6f0; 
+      padding: 6px; 
+      border-radius: 6px; 
+      margin: 6px 0; 
+    }
+
+    #chat-input-container {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+
+    #chat-input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      outline: none;
+    }
+
+    #send-btn {
+      background: #592642;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #send-btn:hover {
+      background: #7a1253;
+    }
+
+    /* Mobile Navigation Toggle */
+    .nav-toggle {
+      display: none;
+      background: #a31a71;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    /* MOBILE RESPONSIVE STYLES */
+    @media (max-width: 768px) {
+      nav {
+        padding: 10px 15px;
+        justify-content: space-between;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      nav a {
+        display: none;
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
+        padding: 10px;
+      }
+
+      nav.active a {
+        display: block;
+      }
+
+      nav p img {
+        width: 50px;
+      }
+
+      .hero {
+        padding: 80px 15px 60px;
+        margin-top: 50px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .hero h3 {
+        font-size: 16px;
+        padding: 0 10px;
+      }
+
+      .hero p {
+        font-size: 16px;
+        padding: 0 10px;
+      }
+
+      .hero .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      .features {
+        flex-direction: column;
+        padding: 20px 15px;
+        gap: 20px;
+      }
+
+      .card {
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .section-title {
+        font-size: 20px;
+        padding: 12px 15px;
+        margin: 30px auto;
+      }
+
+      .feature-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 15px;
+      }
+
+      .features-section {
+        padding: 40px 15px;
+      }
+
+      .features-section h2 {
+        font-size: 28px;
+      }
+
+      .features-grid {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .tip-box, .how-it-works, .team-section {
+        padding: 15px;
+        margin: 15px;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+      }
+
+      .footer h3 {
+        font-size: 20px;
+      }
+
+      .footer h4 {
+        font-size: 16px;
+      }
+
+      .footer-bottom {
+        font-size: 12px;
+      }
+
+      .footer-bottom a {
+        display: block;
+        margin: 5px 0;
+      }
+
+      #chat-container {
+        width: calc(100vw - 30px);
+        right: 15px;
+        bottom: 15px;
+        max-height: 60vh;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 24px;
+      }
+
+      .hero h3 {
+        font-size: 14px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+
+      .section-title {
+        font-size: 18px;
+      }
+
+      .card h3, .feature-card h3 {
+        font-size: 16px;
+      }
+
+      .card p, .feature-card p {
+        font-size: 13px;
+      }
+
+      .footer h3 {
+        font-size: 18px;
+      }
+
+      .footer-contacts p {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <p><img src="safeshe.png" width="60px" height="auto" alt="Shevaara Logo"></p>
+    <button class="nav-toggle" onclick="toggleNav()">☰</button>
+    <a href="login.html">🔐 Login</a>
+    <a href="index.html">🏠 Home</a>
+    <a href="help.html">➕ Help Form</a>
+    <a href="safetytips.html">🛡 Safety Tip</a>
+    <a href="newcontact.html">📞 Contacts</a>
+    <a href="map.html">📍 Safety Map</a>
+    <a href="safety.html" class="btn"><img src="unnamed.png" width="40px" height="auto" alt="Safety"></a>
+  </nav>
+
+  <section class="hero">
+    <h1>Your Safety, <span>Our Priority</span></h1>
+    <h3>Shevaara is not just a website, <span>It is the voice of every girl who deserves freedom without fear</span></h3>
+    <p>
+      Comprehensive safety platform designed specifically for girls.  
+      Get instant help, track safe zones, access health support,  
+      and connect with a caring community.
+    </p>
+    <h3>When we protect a girl's Safety, <span>we are actually protecting the future of our society</span></h3>
+    <a href="registration.html" class="btn">Get Started Free</a>
+  </section>
+
+  <section class="features">
+    <div class="card">
+      <div class="icon">🛡</div>
+      <h3>24/7 Safety</h3>
+      <p>Round-the-clock protection and support</p>
+    </div>
+    <div class="card">
+      <div class="icon">📍</div>
+      <h3>Safe Zone Tracking</h3>
+      <p>Real-time safe and unsafe area alerts</p>
+    </div>
+    <div class="card">
+      <div class="icon">💬</div>
+      <h3>Help Chat</h3>
+      <p>Private counseling and peer support</p>
+    </div>
+    <div class="card">
+      <div class="icon">❤</div>
+      <h3>Health & Wellness</h3>
+      <p>Period tracking and health guidance</p>
+    </div>
+  </section>
+
+  <h2 class="section-title">🔑 Shevaara Key Features 🔑</h2>
+
+  <section class="features-section">
+    <div class="feature-container">
+      <div class="feature-card">
+        <i class="fas fa-map-marker-alt"></i>
+        <h3>Real-Time Safety Map</h3>
+        <p>Check safe & unsafe areas instantly with live map updates.</p>
+      </div>
+
+      <div class="feature-card">
+        <i class="fas fa-bell"></i>
+        <h3>Emergency SOS</h3>
+        <p>One-tap emergency alert to contacts & authorities.</p>
+      </div>
+
+      <div class="feature-card">
+        <i class="fas fa-comments"></i>
+        <h3>Support Chat</h3>
+        <p>Anonymous student-teacher & girl-to-girl help chat.</p>
+      </div>
+
+      <div class="feature-card">
+        <i class="fas fa-heart"></i>
+        <h3>Health & Wellness</h3>
+        <p>Period tracker, daily tips, and health support tools.</p>
+      </div>
+
+      <div class="feature-card">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Data Security</h3>
+        <p>End-to-end encryption for safe & private communication.</p>
+      </div>
+
+      <div class="feature-card">
+        <i class="fas fa-lightbulb"></i>
+        <h3>Daily Safety Tips</h3>
+        <p>Get everyday safety advice to stay aware & protected.</p>
+      </div>
+    </div>
+  </section>
+  <div class="tip-box">
+  <strong style="color: #af0777; font-weight: bold;">Today's Safety Tip:</strong>
+  <span style="color: #2e0721; font-weight: normal;">Always inform your roommate or friend before leaving your room at night.</span>
+</div>
+  <!-- <div class="tip-box">
+    <strong>Today's Safety Tip:</strong> Always inform your roommate or friend before leaving your room at night.
+  </div> -->
+
+  <div class="how-it-works">
+    <h2 style="width: auto; margin: 0 auto 20px; background-color: transparent; color: #2e0721;">How It Works</h2>
+    <div class="features-grid">
+      <div class="card">
+        <h3>1️⃣ Login</h3>
+        <p>Login/Signup using your college email.</p>
+      </div>
+      <div class="card">
+        <h3>2️⃣ SOS</h3>
+        <p>Use the map or SOS button to get help instantly.</p>
+      </div>
+      <div class="card">
+        <h3>3️⃣ Chat</h3>
+        <p>Chat anonymously or connect with mentors.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="team-section">
+    <h3>About Shevaara</h3>
+    <p>Created by students of GPCK, this platform is dedicated to improving the safety of girls living in hostels and colleges. It offers emergency help, chat support, and awareness tips every day.<br>
+      <span>"We dream of a society where every girl feels safe, and Shevaara is the beginning of that dream"</span>
+    </p>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3>Shevaara</h3>
+        <p>Making safety accessible for everyone.<br>
+        Empowering girls & women with safety tools, support & community care.</p>
+        <p><strong>10,000+</strong> Girls Protected | <strong>24/7</strong> Support Available</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Quick Access</h4>
+        <ul>
+          <li><a href="safety.html">🚨 Emergency Help</a></li>
+          <li><a href="map.html">🗺 Safety Map</a></li>
+          <li><a href="advance health.html">💊 Health Support</a></li>
+          <li><a href="chat.html">💬 Help Chat</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contacts">
+        <h4>Emergency Contacts</h4>
+        <p><span class="red">📞 Emergency: 112</span></p>
+        <p><span class="pink">👩 Women Helpline: 1091</span></p>
+        <p><span class="green">👶 Child Helpline: 1098</span></p>
+        <p><span class="blue">🧠 Mental Health: 9152987821</span></p>
+      </div>
+
+      <div class="footer-social">
+        <h4>Follow Us</h4>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>Her safety is everyone's responsibility "Her safety Our duty"</p>
+      <p>© 2025 Shevaara. All Rights Reserved.</p>
+      <p>
+        <a href="privacy.html">Privacy Policy</a> 
+        <a href="term.html">Terms of Service</a> 
+        <a href="contact us.html">Contact Us</a>
+      </p>
+    </div>
+  </footer>
+
+  <div id="chat-container">
+    <div id="chat-header">
+      Shevaara AI
+      <span style="cursor:pointer;" id="chat-close">✖</span>
+    </div>
+    <div id="chat-messages"></div>
+    <div id="chat-input-container">
+      <input type="text" id="chat-input" placeholder="Type your message...">
+      <button id="send-btn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleNav() {
+      const nav = document.getElementById('navbar');
+      nav.classList.toggle('active');
+    }
+
+    const chatClose = document.getElementById("chat-close");
+    const chatBox = document.getElementById("chat-container");
+
+    if (chatClose) {
+      chatClose.addEventListener("click", () => {
+        chatBox.style.display = "none";
+      });
+    }
+
+    const sendBtn = document.getElementById("send-btn");
+    const chatInput = document.getElementById("chat-input");
+
+    if (sendBtn) {
+      sendBtn.addEventListener("click", sendMessage);
+    }
+
+    if (chatInput) {
+      chatInput.addEventListener("keypress", e => {
+        if (e.key === "Enter") sendMessage();
+      });
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("chat-input");
+      const message = input.value.trim();
+      if (!message) return;
+
+      addMessage("You", message, "user-msg");
+      input.value = "";
+
+      // Simulate AI response
+      setTimeout(() => {
+        addMessage("AI", "Thank you for your message. How can I help you today?", "ai-msg");
+      }, 500);
+    }
+
+    function addMessage(sender, text, className) {
+      const chatMessages = document.getElementById("chat-messages");
+      const msg = document.createElement("div");
+      msg.className = className;
+      msg.textContent = `${sender}: ${text}`;
+      chatMessages.appendChild(msg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+  </script>
+
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src='https://embed.tawk.to/68c3b2f4ed0d5119235acf82/1j4u7639d';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+</html>

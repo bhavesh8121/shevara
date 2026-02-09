@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily safety tips</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #fff0f5;
+            font-family: 'Inter', sans-serif;
+            padding-top: 80px;
+        }
+
+        nav {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            background-color: #faf1f9;
+            padding: 10px 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav img {
+            border-radius: 60px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #840a57;
+            font-weight: bold;
+            border-radius: 30px;
+            padding: 8px;
+        }
+
+        nav a:hover {
+            background-color: rgb(234, 136, 211);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #840a57;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .header-section {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #f3d9ff;
+            color: #9f4fd6;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .main-heading {
+            font-size: 40px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin: 10px 0;
+        }
+
+        .main-heading span {
+            color: #9a3774;
+        }
+
+        .subtext {
+            font-size: 20px;
+            color: #666b80;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+            text-align: center;
+            white-space: normal;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .box {
+            background: #fff6fd;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            width: 350px;
+            padding: 30px 25px;
+            position: relative;
+        }
+
+        .icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        .label {
+            display: inline-block;
+            background: #f8d7e4;
+            color: #2d0d1b;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .urgency {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff4d4f;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: lowercase;
+        }
+
+        .title {
+            font-weight: 600;
+            font-size: 18px;
+            color: #1d1d1f;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #666b80;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .box:hover .title {
+            color: #da44bf;
+        }
+
+        .unsafe-section {
+            background-color: #f1d8ef;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 50px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: 'Segoe UI', sans-serif;
+            color: #333;
+        }
+
+        .unsafe-section h2 {
+            font-size: 28px;
+            color: #d13c3c;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .unsafe-section p {
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .unsafe-section ul {
+            list-style-type: disc;
+            padding-left: 40px;
+        }
+
+        .unsafe-section li {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        /* Mobile Responsive - Tablet */
+        @media (max-width: 768px) {
+            nav {
+                padding: 10px 15px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            nav a {
+                display: none;
+                width: 100%;
+                text-align: center;
+                margin: 0;
+                padding: 12px 0;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            nav.active a {
+                display: block;
+            }
+
+            .main-heading {
+                font-size: 32px;
+            }
+
+            .subtext {
+                font-size: 18px;
+            }
+
+            .box {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .container {
+                gap: 30px;
+                padding: 30px 15px;
+            }
+
+            .header-section {
+                padding: 20px 15px;
+            }
+        }
+
+        /* Mobile Responsive - Phone */
+        @media (max-width: 480px) {
+            nav {
+                padding: 10px 10px;
+            }
+
+            .hamburger span {
+                width: 20px;
+                height: 2px;
+                margin: 2px 0;
+            }
+
+            nav a {
+                padding: 10px 0;
+                font-size: 14px;
+            }
+
+            .main-heading {
+                font-size: 28px;
+            }
+
+            .subtext {
+                font-size: 16px;
+            }
+
+            .tag {
+                font-size: 12px;
+                padding: 6px 15px;
+            }
+
+            .box {
+                padding: 20px 15px;
+            }
+
+            .title {
+                font-size: 16px;
+            }
+
+            .description {
+                font-size: 14px;
+            }
+
+            .unsafe-section {
+                padding: 20px 15px;
+                margin: 30px 10px 10px;
+            }
+
+            .unsafe-section h2 {
+                font-size: 24px;
+            }
+
+            .unsafe-section ul {
+                padding-left: 25px;
+            }
+
+            .unsafe-section li {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <img src="safeshe.png" width="60px" height="auto">
+        
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <a href="login.html">🔐login</a>
+        <a href="index.html">🏠Home</a>
+        <a href="help.html">➕Help Form</a>
+        <a href="safetytips.html">🛡safety tip</a>
+        <a href="newcontact.html">📞Contacts</a>
+        <a href="map.html">📍safety map</a>
+        <a href="safety.html" class="btn"><img src="unnamed.png" width="40px" height="auto"></a>
+    </nav>
+
+    <section class="header-section">
+        <p class="tag">🛡 Daily Safety Tips</p>
+        <h1 class="main-heading">Stay Safe, Stay <span>Informed</span></h1>
+        <p class="subtext"><i>Essential safety tips to help you navigate daily situations with confidence and awareness</i></p>
+    </section>
+
+    <div class="container">
+        <!-- Box 1 -->
+        <div class="box">
+            <div class="icon">⚠</div>
+            <div class="label">Emergency</div>
+            <div class="urgency">high</div>
+            <div class="title">Trust Your Instincts</div>
+            <div class="description">
+                If something feels wrong, it probably is. Don't ignore your gut feeling and remove yourself from the situation immediately.
+            </div>
+        </div>
+
+        <!-- Box 2 -->
+        <div class="box">
+            <div class="icon">📍</div>
+            <div class="label" style="background:#f2d7e2;">Travel</div>
+            <div class="urgency" style="background:#ffb84d;">medium</div>
+            <div class="title">Share Your Location</div>
+            <div class="description">
+                Always let trusted friends or family know where you're going and when you expect to return. Use location sharing apps.
+            </div>
+        </div>
+
+        <!-- Box 3 -->
+        <div class="box">
+            <div class="icon" style="background:#fdfbff;">📞</div>
+            <div class="label" style="background:#e6ccd9;">Digital</div>
+            <div class="urgency">high</div>
+            <div class="title">Keep Emergency Contacts Ready</div>
+            <div class="description">
+                Save emergency numbers in your phone with shortcuts. Consider adding ICE (In Case of Emergency) contacts.
+            </div>
+        </div>
+
+        <!-- Box 4 -->
+        <div class="box">
+            <div class="icon">🕛</div>
+            <div class="label" style="background:#f2cde3;">Night Safety</div>
+            <div class="urgency" style="background:#ffb84d;">medium</div>
+            <div class="title">Stay Alert at Night</div>
+            <div class="description">
+                Avoid wearing headphones, stay in well-lit areas, and keep your phone charged. Walk confidently and be aware of your surroundings.
+            </div>
+        </div>
+
+        <!-- Box 5 -->
+        <div class="box">
+            <div class="icon">🛡</div>
+            <div class="label" style="background:#eec3d4;">Personal</div>
+            <div class="urgency">high</div>
+            <div class="title">Self-Defense Basics</div>
+            <div class="description">
+                Learn basic self-defense techniques. Aim for vulnerable areas if attacked: eyes, nose, groin, and shin.
+            </div>
+        </div>
+
+        <!-- Box 6 -->
+        <div class="box">
+            <div class="icon">🛡</div>
+            <div class="label" style="background:#f2cde3;">Online</div>
+            <div class="urgency" style="background:#ffb84d;">medium</div>
+            <div class="title">Protect Your Privacy Online</div>
+            <div class="description">
+                Don't share personal information on social media. Use privacy settings and be cautious about meeting people you've met online.
+            </div>
+        </div>
+    </div>
+
+    <div class="unsafe-section">
+        <h2>⚠ Unsafe Zones to Avoid</h2>
+        <p>Be aware of areas with frequent incidents or low visibility.</p>
+        <ul>
+            <li>🚫 Avoid hostel back gate after 8 PM — low lighting.</li>
+            <li>🚫 Path near canteen has stray dogs — avoid if alone at night.</li>
+            <li>🚫 Outer campus road under construction — not safe after sunset.</li>
+            <li>🚫 Local park has no CCTV — prefer group visits only.</li>
+            <li>🚫 avoid go to dark classrooms alone.</li>
+        </ul>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navbar = document.getElementById('navbar');
+
+        hamburger.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+        });
+
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

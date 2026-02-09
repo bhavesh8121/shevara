@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us - SafeShe</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+  color: #333;
+}
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+h1 {
+  color: #880E4F;
+  text-align: center;
+}
+.contact-info {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f1f1f1;
+  border-left: 5px solid #880E4F;
+  border-radius: 8px;
+}
+.contact-info p {
+  margin: 8px 0;
+}
+.form-section {
+  margin-top: 30px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+label {
+  margin: 8px 0 5px;
+  font-weight: bold;
+}
+input, textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+textarea {
+  resize: vertical;
+}
+button {
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #880E4F;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+button:hover {
+  background: #ad1457;
+}
+.message-box {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+.message-box.success { color: #00aa00; }
+.message-box.error { color: #ff4444; }
+.footer {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 40px;
+  color: #666;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Contact Us</h1>
+  <p>We’d love to hear from you. Reach us through the details below or use the form.</p>
+
+  <div class="contact-info">
+    <p>📞 <strong>Phone:</strong> <a href="tel:9696457806">9696457806</a></p>
+    <p>📧 <strong>Email:</strong> <a href="mailto:safeshe2025@gmail.com">safeshe2025@gmail.com</a></p>
+    <p>💬 <strong>Live Chat:</strong> Available on our website (see Chat Page)</p>
+  </div>
+
+  <div class="form-section">
+    <h2>Send us a Message</h2>
+    <form id="contactForm">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Your Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="message-box" id="responseMessage"></div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 SafeShe. All rights reserved.</p>
+  </div>
+</div>
+
+<script>
+const form = document.getElementById("contactForm");
+const responseBox = document.getElementById("responseMessage");
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+
+  try {
+    const res = await fetch('contact_backend.php', { method: 'POST', body: formData });
+    const data = await res.json();
+
+    if (data.success) {
+      responseBox.textContent = data.message;
+      responseBox.className = "message-box success";
+      form.reset();
+    } else {
+      responseBox.textContent = data.error || "Something went wrong.";
+      responseBox.className = "message-box error";
+    }
+  } catch(err) {
+    responseBox.textContent = "Network error.";
+    responseBox.className = "message-box error";
+    console.error(err);
+  }
+});
+</script>
+</body>
+</html>

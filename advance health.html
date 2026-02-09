@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shevaara - Health & Wellness</title>
+  <style>
+    :root{
+      --purple:#830760;
+      --purple-dark:#711051;
+      --pink:#C2185B;
+      --bg:#fdfbff;
+      --card:#ffffff;
+      --text:#333;
+      --muted:#666;
+      --shadow:0 6px 14px rgba(0,0,0,.08);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Segoe UI, system-ui, -apple-system, Roboto, Arial, sans-serif;background:var(--bg);color:var(--text);padding-top:70px}
+
+    /* Navigation Styles */
+    nav {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #faf1f9;
+      padding: 25px 20px;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .logo-container {
+      position: absolute;
+      left: 20px;
+      top: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-container img {
+      border-radius: 60px;
+      width: 60px;
+      height: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      flex: 1;
+      justify-content: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #840a57;
+      font-weight: bold;
+      border-radius: 30px;
+      padding: 8px 15px;
+      white-space: nowrap;
+      transition: background-color 0.3s;
+    }
+
+    nav a:hover {
+      background-color: rgb(246, 154, 224);
+    }
+
+    /* Hamburger Menu Button */
+    .nav-toggle {
+      display: none;
+      background: #a31a71;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+      position: absolute;
+      right: 20px;
+      top: 10px;
+    }
+
+    /* Hero */
+    .hero{padding:56px 20px;background:linear-gradient(135deg,#f3e5f5,#f8bbd0);text-align:center}
+    .hero h1{margin:0;font-size:38px;color:var(--purple-dark)}
+    .hero h1 span{color:var(--pink)}
+    .hero p{margin:10px auto 0;max-width:780px;color:#444}
+
+    /* Grid */
+    .grid{display:grid;gap:24px;padding:34px 24px;grid-template-columns:repeat(12,minmax(0,1fr));max-width:1150px;margin:0 auto}
+    .card{grid-column:span 12;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+    .card h3{margin:0 0 8px;color:var(--purple)}
+    .card p{color:var(--muted)}
+    .muted{color:var(--muted)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    label{font-weight:600;font-size:14px}
+    input,select{width:100%;padding:10px;border:1px solid #e6e6e6;border-radius:10px;font-size:14px}
+    .primary{background:var(--purple);color:#fff;border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
+    .primary:hover{background:var(--purple-dark)}
+    .chip{display:inline-block;padding:6px 10px;border-radius:999px;background:#f3e5f5;color:var(--purple);font-weight:700;font-size:12px;margin-right:8px}
+
+    /* Results */
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+    .kpi{border:1px solid #eee;border-radius:12px;padding:12px;text-align:center}
+    .kpi .title{font-size:12px;color:#666}
+    .kpi .value{font-size:16px;font-weight:800;margin-top:4px}
+
+    /* Tables */
+    table{width:100%;border-collapse:separate;border-spacing:0 8px;margin-top:10px}
+    th,td{text-align:left;padding:12px 14px}
+    tbody tr{background:#faf7fb}
+    tbody tr td:first-child, thead tr th:first-child{border-top-left-radius:12px;border-bottom-left-radius:12px}
+    tbody tr td:last-child, thead tr th:last-child{border-top-right-radius:12px;border-bottom-right-radius:12px}
+    thead th{font-size:12px;color:#666}
+
+    /* Pills */
+    .pill{padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;display:inline-block}
+    .pill.safe{background:#e8f5e9;color:#1b5e20}
+    .pill.fertile{background:#e3f2fd;color:#0d47a1}
+    .pill.pms{background:#fff3e0;color:#e65100}
+    .pill.period{background:#ffebee;color:#b71c1c}
+
+    /* Sections placement */
+    .span-7{grid-column:span 7}
+    .span-5{grid-column:span 5}
+
+    /* Tip list */
+    .list{margin:8px 0 0;padding-left:18px;color:#555}
+
+    /* Floating Emergency */
+    .fab{position:fixed;right:22px;bottom:22px;background:#FF5252;color:#fff;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:22px;box-shadow:0 10px 20px rgba(0,0,0,.25);cursor:pointer}
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 900px) {
+      .row{grid-template-columns:1fr}
+      .span-7,.span-5{grid-column:span 12}
+      .kpis{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 60px;
+      }
+
+      nav {
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 10px 15px;
+      }
+
+      .logo-container {
+        position: static;
+        left: auto;
+        top: auto;
+        margin: 0;
+        width: auto;
+        justify-content: flex-start;
+      }
+
+      .logo-container img {
+        width: 50px;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+        margin-top: 10px;
+        justify-content: center;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        width: 100%;
+        text-align: center;
+      }
+
+      nav a {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        margin: 5px 0;
+      }
+
+      .hero {
+        padding: 40px 15px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .grid {
+        padding: 20px 15px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      table {
+        font-size: 12px;
+      }
+
+      th, td {
+        padding: 8px 6px;
+      }
+
+      .kpis {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .fab {
+        width: 48px;
+        height: 48px;
+        right: 15px;
+        bottom: 15px;
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 24px;
+      }
+
+      .card h3 {
+        font-size: 18px;
+      }
+
+      input, select {
+        font-size: 16px;
+      }
+
+      .primary {
+        padding: 12px;
+        width: 100%;
+      }
+
+      .row {
+        gap: 10px;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      /* Additional fixes for small screens */
+      .card {
+        padding: 14px;
+      }
+
+      .nav-links a {
+        padding: 10px;
+      }
+
+      .nav-toggle {
+        padding: 8px 12px;
+        font-size: 18px;
+      }
+
+      .fab {
+        width: 44px;
+        height: 44px;
+        right: 12px;
+        bottom: 12px;
+        font-size: 16px;
+      }
+    }
+
+    /* Additional adjustments for very small screens */
+    @media (max-width: 360px) {
+      .hero h1 {
+        font-size: 22px;
+      }
+
+      .card h3 {
+        font-size: 16px;
+      }
+
+      .nav-links a {
+        font-size: 14px;
+        padding: 8px;
+      }
+
+      .primary {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="logo-container">
+      <img src="safeshe.png" alt="shevaara" />
+    </div>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="newlogin.html">🔐 Login</a></li>
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="help.html">➕ Help Form</a></li>
+      <li><a href="safetytips.html">🛡 Safety Tip</a></li>
+      <li><a href="newcontact.html">📞 Contacts</a></li>
+      <li><a href="map.html">📍 Safety Map</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1>Your Health, <span>Your Choice</span></h1>
+    <p>Smart tools to track your cycle, predict future dates, spot fertile & PMS windows, log symptoms, and get instant self‑care tips — all in one Shevaara page.</p>
+  </section>
+
+  <!-- Grid -->
+  <main class="grid">
+
+    <!-- Advanced Period Tracker -->
+    <section class="card span-7" id="period-card">
+      <h3>📅 Advanced Period Tracker</h3>
+      <p class="muted">Enter once — we'll remember it on this device and keep predicting upcoming cycles for you.</p>
+
+      <div class="row" style="margin-top:10px">
+        <div>
+          <label for="lastStart">Last period start date</label>
+          <input type="date" id="lastStart" />
+        </div>
+        <div>
+          <label for="cycleLen">Average cycle length (days)</label>
+          <input type="number" id="cycleLen" placeholder="e.g. 28" min="18" max="60" />
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label for="periodLen">Usual period length (days)</label>
+          <input type="number" id="periodLen" placeholder="e.g. 5" min="1" max="10" />
+        </div>
+        <div>
+          <label for="lutealLen">Luteal phase (days) <span class="muted">(optional, default 14)</span></label>
+          <input type="number" id="lutealLen" placeholder="14" min="10" max="18" />
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <button class="primary" onclick="predict()">Predict Next Cycles</button>
+        </div>
+        <div>
+          <button class="primary" type="button" onclick="resetTracker()">Reset</button>
+        </div>
+      </div>
+
+      <div class="kpis" id="kpis" aria-live="polite" style="display:none">
+        <div class="kpi"><div class="title">Next period</div><div class="value" id="kpi-next"></div></div>
+        <div class="kpi"><div class="title">Ovulation day</div><div class="value" id="kpi-ovu"></div></div>
+        <div class="kpi"><div class="title">Fertile window</div><div class="value" id="kpi-fertile"></div></div>
+        <div class="kpi"><div class="title">PMS window</div><div class="value" id="kpi-pms"></div></div>
+      </div>
+
+      <h4 style="margin-top:18px">Upcoming 6 cycles</h4>
+      <table id="cyclesTbl" style="display:none">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Period window</th>
+            <th>Status</th>
+            <th>Ovulation</th>
+            <th>Fertile window</th>
+            <th>PMS days</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <p class="muted" style="margin-top:8px">Note: Predictions are estimates only and not a substitute for professional medical advice.</p>
+    </section>
+
+    <!-- Symptom Logger + Tips -->
+    <section class="card span-5">
+      <h3>🩺 Symptom Logger & Smart Tips</h3>
+      <p class="muted">Log how you feel today to see targeted self‑care suggestions.</p>
+      <div class="row">
+        <div>
+          <label for="logDate">Date</label>
+          <input type="date" id="logDate" />
+        </div>
+        <div>
+          <label for="flow">Flow</label>
+          <select id="flow">
+            <option value="none">None</option>
+            <option value="light">Light</option>
+            <option value="medium">Medium</option>
+            <option value="heavy">Heavy</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Symptoms</label>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px; margin-top:6px">
+            <label><input type="checkbox" value="cramps"/> Cramps</label>
+            <label><input type="checkbox" value="headache"/> Headache</label>
+            <label><input type="checkbox" value="mood"/> Mood swings</label>
+            <label><input type="checkbox" value="fatigue"/> Fatigue</label>
+            <label><input type="checkbox" value="acne"/> Acne</label>
+            <label><input type="checkbox" value="bloating"/> Bloating</label>
+          </div>
+        </div>
+        <div>
+          <label for="notes">Notes</label>
+          <input id="notes" placeholder="anything to remember…" />
+        </div>
+      </div>
+      <div class="row">
+        <button class="primary" onclick="saveLog()">Save today's log</button>
+        <button class="primary" type="button" onclick="showLogs()">View last 7 logs</button>
+      </div>
+
+      <div id="smartTips" style="margin-top:12px"></div>
+      <div id="logs" style="margin-top:10px"></div>
+    </section>
+
+    <!-- Mental Health -->
+    <section class="card span-7">
+      <h3>🧠 Mental Health</h3>
+      <p>Quick practices to lower stress. Try box‑breathing (4‑4‑4‑4), a 10‑minute walk, or journaling three things you're grateful for.</p>
+      <iframe width="100%" height="210" src="https://www.youtube.com/embed/inpok4MKVLM" title="5‑Minute Meditation" allowfullscreen></iframe>
+    </section>
+
+    <!-- Nutrition & Safety Kit -->
+    <section class="card span-5">
+      <h3>🥗 Nutrition & Safety Kit</h3>
+      <ul class="list">
+        <li>Iron‑rich foods: spinach, beetroot, pomegranate, jaggery.</li>
+        <li>Hydration goal: 8–10 glasses/day; add ORS during heavy flow.</li>
+        <li>Calcium & Vitamin‑D: milk/curd, tofu, almonds, sunlight.</li>
+        <li>Limit caffeine & excess sugar around PMS days.</li>
+      </ul>
+      <p style="margin-top:8px"><span class="chip">Hostel safety pack</span> pads • pain‑relief med • water bottle • heat patch • small towel • emergency contacts card.</p>
+    </section>
+
+    <!-- Emergency Help -->
+    <section class="card span-12">
+      <h3>🚑 Emergency Help</h3>
+      <div class="row">
+        <div>
+          <p><strong>First aid basics</strong></p>
+          <ul class="list">
+            <li>Burns: cool with running water for 10 minutes.</li>
+            <li>Cuts: clean, apply pressure; seek help if bleeding doesn't stop.</li>
+            <li>Fainting: lay flat, elevate legs; loosen tight clothing.</li>
+          </ul>
+        </div>
+        <div>
+          <p><strong>Nearest hospitals</strong> (sign in to Maps on your device):</p>
+          <iframe height="220" style="width:100%;border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=hospitals%20near%20me&output=embed"></iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="fab" title="Call emergency" onclick="callEmergency()">📞</div>
+
+  <script>
+    // Navigation Toggle Function
+    function toggleNav() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('active');
+    }
+
+    // Close menu when clicking on a link (optional but improves UX)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          document.getElementById('navLinks').classList.remove('active');
+        }
+      });
+    });
+
+    // ===== Utilities =====
+    const fmt = (d)=> d.toLocaleDateString(undefined,{weekday:'short', year:'numeric', month:'short', day:'numeric'});
+    const addDays = (d,n)=>{ const x=new Date(d); x.setDate(x.getDate()+n); return x };
+
+    // Persist/restore
+    const STORAGE_KEY = 'safeshe_cycle_v1';
+    const LOG_KEY = 'safeshe_symptoms_v1';
+
+    window.addEventListener('DOMContentLoaded',()=>{
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+      if(saved){
+        lastStart.value = saved.lastStart;
+        cycleLen.value = saved.cycleLen;
+        periodLen.value = saved.periodLen;
+        lutealLen.value = saved.lutealLen || '';
+        predict();
+      }
+      // default dates
+      if(!lastStart.value){
+        const today = new Date();
+        const iso = new Date(today.getFullYear(), today.getMonth(), today.getDate()-28).toISOString().slice(0,10);
+        lastStart.value = iso;
+      }
+      if(!logDate.value){ logDate.value = new Date().toISOString().slice(0,10); }
+    });
+
+    function saveState(){
+      const data = {
+        lastStart: lastStart.value,
+        cycleLen: Number(cycleLen.value||28),
+        periodLen: Number(periodLen.value||5),
+        lutealLen: Number(lutealLen.value||14)
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      return data;
+    }
+
+    function resetTracker(){
+      localStorage.removeItem(STORAGE_KEY);
+      document.getElementById('kpis').style.display='none';
+      document.getElementById('cyclesTbl').style.display='none';
+      alert('Tracker cleared on this device.');
+    }
+
+    // ===== Prediction logic =====
+    function predict(){
+      const data = saveState();
+      if(!data.lastStart) return alert('Please set last period start date');
+      const start = new Date(data.lastStart);
+      const cyc = Math.max(18, Math.min(60, data.cycleLen||28));
+      const pLen = Math.max(1, Math.min(10, data.periodLen||5));
+      const luteal = Math.max(10, Math.min(18, data.lutealLen||14));
+
+      const rows = [];
+      for(let i=1;i<=6;i++){
+        const nextStart = addDays(start, cyc*i);
+        const end = addDays(nextStart, pLen-1);
+        const ovu = addDays(nextStart, -luteal);
+        const fertileStart = addDays(ovu, -5);
+        const fertileEnd = addDays(ovu, 0);
+        const pmsStart = addDays(nextStart, -7);
+        const pmsEnd = addDays(nextStart, -1);
+        rows.push({i,nextStart,end,ovu,fertileStart,fertileEnd,pmsStart,pmsEnd});
+      }
+
+      // KPIs for the nearest cycle (rows[0])
+      const R = rows[0];
+      document.getElementById('kpi-next').textContent = fmt(R.nextStart) + ' – ' + fmt(R.end);
+      document.getElementById('kpi-ovu').textContent = fmt(R.ovu);
+      document.getElementById('kpi-fertile').textContent = fmt(R.fertileStart) + ' → ' + fmt(R.fertileEnd);
+      document.getElementById('kpi-pms').textContent = fmt(R.pmsStart) + ' → ' + fmt(R.pmsEnd);
+      document.getElementById('kpis').style.display='grid';
+
+      // Table
+      const tbody = document.querySelector('#cyclesTbl tbody');
+      tbody.innerHTML='';
+      rows.forEach(r=>{
+        const tr = document.createElement('tr');
+        const status = statusPill(r);
+        tr.innerHTML = `
+          <td>${r.i}</td>
+          <td>${fmt(r.nextStart)} – ${fmt(r.end)} <span class="pill period">period</span></td>
+          <td>${status}</td>
+          <td>${fmt(r.ovu)}</td>
+          <td>${fmt(r.fertileStart)} – ${fmt(r.fertileEnd)} <span class="pill fertile">fertile</span></td>
+          <td>${fmt(r.pmsStart)} – ${fmt(r.pmsEnd)} <span class="pill pms">PMS</span></td>`;
+        tbody.appendChild(tr);
+      });
+      document.getElementById('cyclesTbl').style.display='table';
+
+      // Contextual tips based on the nearest state
+      buildSmartTips(R);
+    }
+
+    function statusPill(r){
+      const today = new Date();
+      if(today >= r.nextStart && today <= r.end) return '<span class="pill period">On period</span>';
+      if(today >= r.fertileStart && today <= r.fertileEnd) return '<span class="pill fertile">Fertile window</span>';
+      if(today >= r.pmsStart && today <= r.pmsEnd) return '<span class="pill pms">PMS days</span>';
+      return '<span class="pill safe">Regular days</span>';
+    }
+
+    // ===== Symptom logging =====
+    function saveLog(){
+      const date = logDate.value;
+      if(!date) return alert('Pick a date');
+      const checks = Array.from(document.querySelectorAll('input[type=checkbox]:checked')).map(x=>x.value);
+      const entry = {date, flow: flow.value, symptoms: checks, notes: notes.value};
+      const all = JSON.parse(localStorage.getItem(LOG_KEY)||'[]');
+      const filtered = all.filter(x=>x.date!==date);
+      filtered.push(entry);
+      localStorage.setItem(LOG_KEY, JSON.stringify(filtered));
+      showLogs();
+      // quick tip
+      const tip = suggestFromSymptoms(entry);
+      document.getElementById('smartTips').innerHTML = tip;
+    }
+
+    function showLogs(){
+      const all = JSON.parse(localStorage.getItem(LOG_KEY)||'[]').sort((a,b)=> new Date(b.date)-new Date(a.date)).slice(0,7);
+      if(!all.length){ document.getElementById('logs').innerHTML = '<p class="muted">No logs yet.</p>'; return; }
+      let html = '<table><thead><tr><th>Date</th><th>Flow</th><th>Symptoms</th><th>Notes</th></tr></thead><tbody>';
+      all.forEach(e=>{ html += `<tr><td>${e.date}</td><td>${e.flow}</td><td>${(e.symptoms||[]).join(', ')||'-'}</td><td>${e.notes||''}</td></tr>`; });
+      html += '</tbody></table>';
+      document.getElementById('logs').innerHTML = html;
+    }
+
+    function suggestFromSymptoms(e){
+      const s = new Set(e.symptoms||[]);
+      const tips=[];
+      if(s.has('cramps')) tips.push('Use a heat patch 15–20 min and try gentle stretching.');
+      if(s.has('headache')) tips.push('Hydrate and rest your eyes; consider paracetamol if needed.');
+      if(s.has('mood')) tips.push('Try 5‑minute breathing or a short walk; limit caffeine.');
+      if(s.has('bloating')) tips.push('Avoid very salty foods; sip warm water.');
+      if(s.has('fatigue')) tips.push('Aim for 7–9 hours sleep and include iron‑rich snacks.');
+      if(!tips.length) tips.push('You are doing great! Keep hydrating and moving lightly.');
+      return '<p><strong>Smart tips:</strong> '+ tips.join(' ') + '</p>';
+    }
+
+    function buildSmartTips(r){
+      const today = new Date();
+      let msg='';
+      if(today >= r.pmsStart && today <= r.pmsEnd){
+        msg = 'PMS window – prepare a small care kit, hydrate well, and plan lighter tasks if possible.';
+      } else if(today >= r.fertileStart && today <= r.fertileEnd){
+        msg = 'Fertile window – practice extra caution and remember your preferences & boundaries.';
+      } else if(today >= r.nextStart && today <= r.end){
+        msg = 'On period – carry pads/tampons, use heat therapy, and avoid heavy lifting.';
+      } else {
+        msg = 'Regular days – maintain exercise and balanced meals; keep your kit ready.';
+      }
+      document.getElementById('smartTips').innerHTML = '<p><strong>Today:</strong> '+msg+'</p>';
+    }
+
+    // Emergency dialer helper (works on phones)
+    function callEmergency(){
+      if(/Mobi|Android/i.test(navigator.userAgent)){
+        window.location.href = 'tel:112';
+      }else{
+        alert('Dial 112 (India) or your local emergency number.');
+      }
+    }
+  </script>
+</body>
+</html>

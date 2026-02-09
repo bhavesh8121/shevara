@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anonymous Help - Shevaara</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fbe0e9;
+      margin: 0;
+      padding: 0;
+    }
+    
+    nav { 
+      width: 100%;
+      position: fixed;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      background-color: #faf1f9;
+      padding: 10px 20px;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    a:hover{
+      background-color: rgb(246, 154, 224);
+    }
+
+    img{
+      border-radius: 60px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #840a57;
+      font-weight: bold;
+      border-radius: 30px;
+      padding: 8px;
+    }
+
+    header { 
+      margin-top: 80px;
+      background-color:#9a3774;
+      color: rgb(242, 239, 242);
+      padding: 15px;
+      text-align: center;
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #ffeef4;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgb(139, 77, 153);
+      text-align: left;
+    }
+
+    h2 {
+      text-align: center;
+      color: #880e4f;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      color: #333;
+    }
+
+    select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #a3227b;
+      color: white;
+      font-weight: bold;
+      margin-top: 20px;
+      cursor: pointer;
+      border: none;
+    }
+
+    button:hover {
+      background-color: #872974;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #fce4ec;
+      margin-top: 40px;
+      color: #880e4f;
+    }
+    
+    .success-message {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 20px 0;
+      display: none;
+    }
+    
+    .error-message {
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 20px 0;
+      display: none;
+    }
+
+    /* Hamburger Menu Styles */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background-color: #840a57;
+      margin: 3px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      nav {
+        padding: 10px 15px;
+      }
+      
+      .hamburger {
+        display: flex;
+      }
+      
+      nav a {
+        display: none;
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        padding: 12px 0;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      
+      nav.active a {
+        display: block;
+      }
+      
+      .form-container {
+        margin: 30px 15px;
+        padding: 15px;
+      }
+
+      header {
+        margin-top: 70px;
+        padding: 10px;
+      }
+
+      h2 {
+        font-size: 1.5em;
+      }
+
+      label {
+        margin: 10px 0 5px;
+      }
+
+      select, textarea, button {
+        padding: 8px;
+        font-size: 14px;
+      }
+
+      footer {
+        padding: 8px;
+        font-size: 0.9em;
+      }
+
+      .success-message, .error-message {
+        padding: 10px;
+        font-size: 0.9em;
+      }
+    }
+
+    /* Extra Small Devices */
+    @media (max-width: 480px) {
+      nav {
+        padding: 10px 10px;
+      }
+      
+      .hamburger span {
+        width: 20px;
+        height: 2px;
+        margin: 2px 0;
+      }
+      
+      nav a {
+        padding: 10px 0;
+        font-size: 14px;
+      }
+
+      .form-container {
+        margin: 20px 10px;
+        padding: 12px;
+      }
+
+      header {
+        margin-top: 60px;
+        padding: 8px;
+      }
+
+      h2 {
+        font-size: 1.3em;
+      }
+
+      select, textarea, button {
+        padding: 6px;
+        font-size: 12px;
+      }
+
+      footer {
+        padding: 6px;
+        font-size: 0.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <img src="safeshe.png" alt="Shevaara" width="60px" height="auto">
+    <!-- Hamburger Icon -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <!-- Navigation Links -->
+    <a href="login.html">🔐login</a>
+    <a href="index.html">🏠Home</a>
+    <a href="help.html">➕Help Form</a>
+    <a href="safetytips.html">🛡safety tip</a>
+    <a href="newcontact.html">📞Contacts</a>
+    <a href="map.html">📍safety map</a>
+  </nav>
+
+  <header>
+    <h1>Anonymous Help Form</h1>
+    <p>Send your concern without revealing identity</p>
+  </header>
+
+  <div class="form-container">
+    <h2>Need Support?</h2>
+    <div id="successMessage" class="success-message">✅ Your message has been sent anonymously.<br>Thank you for trusting us.</div>
+    <div id="errorMessage" class="error-message"></div>
+    
+    <form id="helpForm">
+      <label for="problem">Select Your Issue:</label>
+      <select id="problem" name="problem" required>
+        <option value="">-- Choose an issue --</option>
+        <option value="period">Period Emergency</option>
+        <option value="health">Health Issue</option>
+        <option value="unsafe">Feeling Unsafe</option>
+        <option value="other">Other Personal Problem</option>
+      </select>
+
+      <label for="message">Describe your problem:</label>
+      <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+
+      <button type="submit">Send Anonymously</button>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2025 Shevaara | We hear you, always.
+  </footer>
+
+  <script>
+    // Get DOM elements
+    const hamburger = document.getElementById('hamburger');
+    const navbar = document.getElementById('navbar');
+
+    // Toggle mobile menu
+    hamburger.addEventListener('click', () => {
+      navbar.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navbar.classList.remove('active');
+      });
+    });
+
+    document.getElementById('helpForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const issue = document.getElementById('problem').value;
+      const message = document.getElementById('message').value;
+      
+      if (!issue || !message) {
+        showError('Please fill in all fields');
+        return;
+      }
+      
+      // Show loading state
+      const submitButton = this.querySelector('button[type="submit"]');
+      const originalText = submitButton.textContent;
+      submitButton.textContent = 'Sending...';
+      submitButton.disabled = true;
+      
+      // Send data to PHP
+      const formData = new FormData(this);
+      
+      fetch('help.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          showSuccess();
+          document.getElementById('helpForm').reset();
+        } else {
+          showError(data.message || 'An error occurred while sending your request');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        showError('Network error occurred. Please try again.');
+      })
+      .finally(() => {
+        // Reset button
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+      });
+    });
+    
+    function showSuccess() {
+      document.getElementById('successMessage').style.display = 'block';
+      document.getElementById('errorMessage').style.display = 'none';
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        document.getElementById('successMessage').style.display = 'none';
+      }, 5000);
+    }
+    
+    function showError(message) {
+      document.getElementById('errorMessage').textContent = message;
+      document.getElementById('errorMessage').style.display = 'block';
+      document.getElementById('successMessage').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

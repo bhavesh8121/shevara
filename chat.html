@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anonymous Chat - Shevaara</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background: #880E4F;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 20px;
+    }
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: 800px;
+      margin: auto;
+      width: 100%;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #f5f5f5;
+    }
+    .message {
+      margin: 10px 0;
+      padding: 10px 15px;
+      border-radius: 10px;
+      max-width: 70%;
+      word-wrap: break-word;
+    }
+    .user {
+      background: #880E4F;
+      color: #fff;
+      margin-left: auto;
+      text-align: right;
+    }
+    .other {
+      background: #e0e0e0;
+      margin-right: auto;
+      text-align: left;
+    }
+    .timestamp {
+      font-size: 10px;
+      color: #777;
+      margin-top: 4px;
+      text-align: right;
+    }
+    .input-box {
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid #ddd;
+    }
+    .input-box input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .input-box button {
+      margin-left: 10px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      background: #880E4F;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .input-box button:hover {
+      background: #ad1457;
+    }
+  </style>
+</head>
+<body>
+  <header>Anonymous Chat - Shevaara</header>
+
+  <div class="chat-container">
+    <div class="messages" id="messages"></div>
+    <div class="input-box">
+      <input type="text" id="messageInput" placeholder="Type your message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const messagesDiv = document.getElementById("messages");
+    const input = document.getElementById("messageInput");
+    const username = 'anon_' + Math.floor(Math.random() * 10000); // random anonymous ID
+
+    async function fetchMessages() {
+      try {
+        const res = await fetch('chat_backend.php');
+        const data = await res.json();
+        messagesDiv.innerHTML = '';
+        data.forEach(msg => {
+          const div = document.createElement('div');
+          div.classList.add('message', msg.sender === username ? 'user' : 'other');
+          div.innerHTML = `
+            <div>${msg.message}</div>
+            <div class="timestamp">${new Date(msg.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+          `;
+          messagesDiv.appendChild(div);
+        });
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      } catch (err) {
+        console.error("Failed to fetch messages:", err);
+      }
+    }
+
+    async function sendMessage() {
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      try {
+        await fetch('chat_backend.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `message=${encodeURIComponent(msg)}&sender=${encodeURIComponent(username)}`
+        });
+        input.value = "";
+        fetchMessages();
+      } catch (err) {
+        console.error("Failed to send message:", err);
+      }
+    }
+
+    // Auto-refresh every second
+    setInterval(fetchMessages, 1000);
+    fetchMessages();
+
+    // Enter key = send
+    input.addEventListener("keypress", e => {
+      if (e.key === "Enter") sendMessage();
+    });
+  </script>
+</body>
+</html>

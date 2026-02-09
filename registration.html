@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shevaara - College Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #f399ca, #6c013c);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0px 6px 15px rgba(0,0,0,0.15);
+      width: 380px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #880E4F;
+    }
+    input {
+      width: 90%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 95%;
+      padding: 12px;
+      background: linear-gradient(135deg, #e872b3, #910e82);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 16px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: linear-gradient(135deg, #e853c3, #880E4F);
+    }
+    .links {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+    .links a {
+      color: #c5118c;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+      margin: 10px 0;
+    }
+    .success {
+      color: green;
+      font-size: 14px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>Shevaara Registration</h2>
+    
+    
+    
+    <form action="register.php" method="POST">
+      <input type="text" name="full_name" placeholder="Full Name (as per College ID)" required><br>
+      <input type="text" name="college_id" placeholder="College ID / Admission Form No." required><br>
+      <input type="email" name="email" placeholder="Email (example@gmail.com)" required><br>
+      <input type="password" name="password" placeholder="Create Password" required><br>
+      <input type="password" name="confirm_password" placeholder="Confirm Password" required><br>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <div class="links">
+      <p>Already registered? <a href="login.html">Login</a></p>
+    </div>
+  </div>
+
+</body>
+</html>

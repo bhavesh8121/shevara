@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Shevaara :- Girls Safety Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <style>
+    body { 
+      margin:0; 
+      padding:0; 
+      font-family:sans-serif; 
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+    
+    header {
+      background:#9a3774; 
+      color:white; 
+      text-align:center; 
+      padding:10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    h2 {
+      text-align:center; 
+      margin:0; 
+      padding:10px; 
+      background:#ee5c97; 
+      color:white;
+      font-size: 1.2rem; /* Reduced for mobile */
+    }
+    
+    #map { 
+      height: 80vh; 
+      width: 100%; 
+      min-height: 300px; /* Ensure minimum height on very small screens */
+    }
+    
+    #sos-btn {
+      position: absolute; 
+      top: 100px; /* Adjusted for mobile */
+      right: 20px;
+      background:red; 
+      color:white; 
+      border:none; 
+      border-radius:50%;
+      width: 50px; /* Smaller on mobile */
+      height: 50px; /* Smaller on mobile */
+      font-size: 16px; /* Smaller font */
+      cursor:pointer;
+      box-shadow:0 0 10px rgba(0,0,0,0.3);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    
+    /* Mobile-specific styles */
+    @media (max-width: 768px) {
+      header {
+        padding: 8px;
+        font-size: 0.9rem;
+      }
+      
+      h2 {
+        padding: 8px;
+        font-size: 1rem;
+      }
+      
+      #map { 
+        height: 70vh; 
+        min-height: 250px;
+      }
+      
+      #sos-btn {
+        top: 90px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 14px;
+      }
+      
+      /* Adjust for iPhone X notch and similar */
+      @supports (padding-top: env(safe-area-inset-top)) {
+        header {
+          padding-top: env(safe-area-inset-top);
+        }
+        
+        #sos-btn {
+          top: calc(90px + env(safe-area-inset-top));
+        }
+      }
+    }
+    
+    @media (max-width: 480px) {
+      header {
+        padding: 6px;
+        font-size: 0.8rem;
+      }
+      
+      h2 {
+        padding: 6px;
+        font-size: 0.9rem;
+      }
+      
+      #map { 
+        height: 65vh; 
+        min-height: 200px;
+      }
+      
+      #sos-btn {
+        top: 85px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+        font-size: 12px;
+      }
+    }
+    
+    /* Landscape mode adjustments */
+    @media (max-width: 768px) and (orientation: landscape) {
+      #map { 
+        height: 85vh; 
+      }
+      
+      #sos-btn {
+        top: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header><p>Live Safety Map for Girls</p></header>
+  <h2>Shevaara :- Girls' Safety Map</h2>
+
+  <div id="map"></div>
+  <button id="sos-btn">SOS</button>
+
+  <script>
+    // Initialize map with default fallback position
+    const map = L.map('map').setView([20.5937, 78.9629], 5); // India center
+
+    // Load OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Safe zones
+    L.marker([26.9135, 75.7878]).addTo(map)
+      .bindPopup("✅ Safe Zone: Girls Hostel Gate");
+    L.marker([26.9150, 75.7892]).addTo(map)
+      .bindPopup("✅ Safe Zone: Library (Well Lit)");
+
+    // Unsafe zones
+    L.circle([26.9100, 75.7850], {
+      color:'red', fillColor:'#f03', fillOpacity:0.4, radius:200
+    }).addTo(map).bindPopup("⚠ Unsafe Zone: Dark Isolated Area");
+
+    L.circle([26.9180, 75.7900], {
+      color:'orange', fillColor:'orange', fillOpacity:0.4, radius:150
+    }).addTo(map).bindPopup("⚠ Caution: Low Lighting Area");
+
+    // CCTV hotspot
+    L.marker([26.9142, 75.7885]).addTo(map)
+      .bindPopup("📹 CCTV Camera Installed");
+
+    // Try to get the user’s live location
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+
+          // Add user marker and center map
+          const userMarker = L.marker([lat, lng]).addTo(map)
+            .bindPopup("📍 You are here").openPopup();
+          map.setView([lat, lng], 16);
+        },
+        (error) => {
+          console.warn("Location access denied or unavailable.", error);
+          alert("⚠ Could not access your location. Showing default area instead.");
+          map.setView([26.9124, 75.7873], 14);
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      );
+    } else {
+      alert("❌ Geolocation is not supported by your browser.");
+    }
+
+    // SOS button action
+    document.getElementById("sos-btn").addEventListener("click", () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((pos) => {
+          const { latitude, longitude } = pos.coords;
+          alert(`🚨 SOS sent!\nYour live location:\nLatitude: ${latitude}\nLongitude: ${longitude}`);
+        });
+      } else {
+        alert("❌ Unable to access your location for SOS alert.");
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shevaara Emergency Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #a31a71, #4b2c92);
+      color: white;
+      text-align: center;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .card h2 {
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+      color: #ffebf8;
+    }
+
+    button {
+      background: #ce1ba1;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #1d607f;
+    }
+
+    input, select {
+      padding: 10px;
+      width: 80%;
+      margin: 10px auto;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .success {
+      color: #90ee90;
+      font-weight: bold;
+    }
+
+    .danger {
+      color: 
+      #ffcccc;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🚨 Shevaara Emergency Dashboard</h1>
+  <p>Your safety, our priority 💜</p>
+
+  <div class="grid">
+    
+    <!-- Fake Call -->
+    <div class="card">
+      <h2>📱 Fake Call</h2>
+      <p>Trigger a fake call to escape unsafe situations.</p>
+      <button onclick="startFakeCall()">Start Fake Call</button>
+    </div>
+
+    <!-- Panic Siren -->
+    <div class="card">
+      <h2>🔊 Panic Siren</h2>
+      <p>Loud siren to draw attention and scare threats.</p>
+      <button onclick="startSiren()">Start Siren</button>
+      <button onclick="stopSiren()">Stop Siren</button>
+    </div>
+
+    <!-- Trusted Contacts -->
+    <div class="card">
+      <h2>👨‍👩‍👧 Trusted Contacts</h2>
+      <input type="text" id="contactName" placeholder="Enter contact name">
+      <input type="tel" id="contactPhone" placeholder="Enter phone number">
+      <button onclick="addContact()">Add Contact</button>
+      <button onclick="sendAlert()">Send Alert 🚨</button>
+      <p id="contactList"></p>
+    </div>
+
+    <!-- Daily Attendance -->
+    <div class="card">
+      <h2>🕒 Daily Safety Check</h2>
+      <p>Mark attendance daily (e.g. 8:00 PM) to confirm safety.</p>
+      <button onclick="markAttendance()">✅ Mark Safe</button>
+      <p id="attendanceStatus"></p>
+    </div>
+
+  </div>
+
+  <!-- Hidden Audios -->
+  <audio id="fakeCallAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+  <audio id="sirenAudio" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"></audio>
+
+  <script>
+    const fakeCallAudio = document.getElementById("fakeCallAudio");
+    const sirenAudio = document.getElementById("sirenAudio");
+
+    // Fake Call
+    function startFakeCall() {
+      alert("📞 Incoming Call from Mom...");
+      fakeCallAudio.play();
+    }
+
+    // Siren
+    function startSiren() {
+      sirenAudio.loop = true;
+      sirenAudio.play();
+      alert("🔊 Panic Siren Activated!");
+    }
+
+    function stopSiren() {
+      sirenAudio.pause();
+      sirenAudio.currentTime = 0;
+    }
+
+    // Trusted Contacts
+    let contacts = [];
+
+    function addContact() {
+      const name = document.getElementById("contactName").value;
+      const phone = document.getElementById("contactPhone").value;
+      if(name && phone) {
+        contacts.push({name, phone});
+        document.getElementById("contactList").innerHTML = 
+          "✅ Added: " + contacts.map(c => c.name + " (" + c.phone + ")").join(", ");
+        document.getElementById("contactName").value = "";
+        document.getElementById("contactPhone").value = "";
+      } else {
+        alert("Please enter both name and phone!");
+      }
+    }
+
+    function sendAlert() {
+      if(contacts.length > 0) {
+        alert("🚨 Alert sent to: " + contacts.map(c => c.name).join(", "));
+      } else {
+        alert("No contacts added!");
+      }
+    }
+
+    // Attendance
+    const ATTENDANCE_TIME = "20:00"; // 8:00 PM
+    let attendanceMarked = false;
+
+    function markAttendance() {
+      const now = new Date();
+      const currentTime = now.getHours().toString().padStart(2, '0') + ":" + 
+                          now.getMinutes().toString().padStart(2, '0');
+
+      if(currentTime >= ATTENDANCE_TIME) {
+        document.getElementById("attendanceStatus").innerHTML = 
+          "✅ Safe marked at " + currentTime;
+        document.getElementById("attendanceStatus").className = "success";
+        attendanceMarked = true;
+      } else {
+        document.getElementById("attendanceStatus").innerHTML = 
+          "⚠ Too early! Mark after " + ATTENDANCE_TIME;
+        document.getElementById("attendanceStatus").className = "danger";
+      }
+    }
+
+    // Auto check if not marked
+    setInterval(() => {
+      const now = new Date();
+      const currentTime = now.getHours().toString().padStart(2, '0') + ":" + 
+                          now.getMinutes().toString().padStart(2, '0');
+      if(currentTime >= ATTENDANCE_TIME && !attendanceMarked) {
+        alert("🚨 Attendance not marked! Auto alert sent to warden/parents.");
+        attendanceMarked = true; // to avoid repeat alerts
+      }
+    }, 60000); // check every 1 minute
+  </script>
+
+</body>
+</html>

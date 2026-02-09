@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shevaara - Get Help Instantly</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f8bbd0, #fce4ec);
+      margin: 0;
+      padding: 0;
+    }
+    nav { 
+      width: 100%;
+      position:fixed;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      background-color:  #faf1f9;
+      padding: 10px 15px;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    a:hover{
+      background-color: rgb(246, 154, 224);
+    }
+
+    img{
+      border-radius: 60px;
+    }
+
+    nav a {
+      margin: 5px 8px;
+      text-decoration: none;
+      color: #840a57;
+      font-weight: bold;
+      border-radius: 30px;
+      padding: 6px 10px;
+      font-size: 0.9em;
+    }
+    
+    /* Hamburger Menu Styles */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background-color: #840a57;
+      margin: 3px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+    
+    /* Mobile Navigation Styles */
+    @media (max-width: 768px) {
+      nav a {
+        display: none;
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        padding: 12px 0;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      
+      nav.active a {
+        display: block;
+      }
+      
+      .hamburger {
+        display: flex;
+      }
+      
+      nav .btn {
+        padding: 8px 12px;
+        font-size: 0.9em;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      nav {
+        padding: 8px 10px;
+      }
+      
+      nav a {
+        padding: 10px 0;
+        font-size: 0.9em;
+      }
+      
+      .hamburger span {
+        width: 20px;
+        height: 2px;
+        margin: 2px 0;
+      }
+      
+      nav .btn {
+        padding: 6px 10px;
+        font-size: 0.8em;
+      }
+    }
+
+    header {
+      background: #a81162;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.3em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-top: 60px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0px 6px 15px rgba(0,0,0,0.15);
+      margin-top: 20px;
+    }
+    h2 {
+      color: #880E4F;
+      border-left: 4px solid #ff4081;
+      padding-left: 10px;
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+    .card {
+      background: #fce4ec;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 1em;
+      display: flex;
+      align-items: flex-start;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.01);
+    }
+    .card i {
+      font-size: 1.4em;
+      margin-right: 12px;
+      color: #d81b99;
+      flex-shrink: 0;
+    }
+    .card strong {
+      color: #950256;
+    }
+    .card a {
+      text-decoration: none;
+      color: #d1009d;
+      font-weight: bold;
+    }
+    .emergency-buttons {
+      text-align: center;
+      margin: 20px 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .contact-list li {
+      background: #fce4ec;
+      margin: 8px 0;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .contact-list li:hover {
+      transform: scale(1.02);
+      background: #f8bbd0;
+    }
+
+    .contact-list span {
+      font-weight: bold;
+      color: #880e4f;
+      flex-grow: 1;
+      margin-right: 10px;
+    }
+
+    .contact-list a {
+      text-decoration: none;
+      background: #d81b93;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 0.9em;
+      transition: background 0.3s ease-in-out;
+    }
+
+    .contact-list a:hover {
+      background: #ad147a;
+    }
+    .btn {
+      background: linear-gradient(135deg, #ff40a3, #c51162);
+      color: white;
+      padding: 12px 16px;
+      margin: 8px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      transition: background 0.3s;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+      font-size: 0.95em;
+      min-width: 140px;
+    }
+    .btn:hover {
+      background: linear-gradient(135deg, #d81bb2, #880E4F);
+    }
+  </style>
+</head>
+<body>
+ <nav id="navbar">
+    <p><img src="safeshe.png" alt="Shevaara" width="40px" height="auto" class="logo-img"></p>
+    <!-- Hamburger Icon -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <!-- Navigation Links -->
+    <a href="login.html">🔐login</a>
+    <a href="index.html">🏠Home</a>
+    <a href="help.html">➕Help Form</a>
+    <a href="safetytips.html">🛡safety tip</a>
+    <a href="newcontact.html">📞Contacts</a>
+    <a href="map.html"> 📍safety map </a>
+    <a href="safety.html" class="btn"><img src="unnamed.png" width="30px" height="auto"></a>
+  </nav> 
+  <br><br><br>
+
+  <br>
+  <br>
+  <header>🚨 Shevaara - Get Help Instantly</header>
+
+  <div class="container">
+
+    <div class="emergency-buttons">
+      <a href="tel:100" class="btn"><i class="fa-solid fa-shield-halved"></i> Police (100)</a>
+      <a href="tel:108" class="btn"><i class="fa-solid fa-truck-medical"></i> Ambulance (108)</a>
+      <a href="tel:9876543210" class="btn"><i class="fa-solid fa-user-shield"></i> Campus Guard</a>
+    </div>
+
+    <h2><i class="fa-solid fa-shield-halved"></i> Police & Security</h2>
+    <div class="card">
+      <i class="fa-solid fa-phone"></i>
+      Police Emergency: <a href="tel:100"><strong>100</strong></a>
+    </div>
+    <div class="card">
+      <i class="fa-solid fa-user-shield"></i>
+      Campus Security Guard: <a href="tel:9876543210"><strong>9876543210</strong></a>
+    </div>
+
+    <h2><i class="fa-solid fa-hospital"></i> Medical Help</h2>
+    <div class="card">
+      <i class="fa-solid fa-briefcase-medical"></i>
+      Shakti Clinic: <a href="tel:9999988888"><strong>9999988888</strong></a>
+    </div>
+    <div class="card">
+      <i class="fa-solid fa-user-nurse"></i>
+      Campus Nurse (Ms. Rekha): <a href="tel:9876501234"><strong>9876501234</strong></a>
+    </div>
+
+    <h2><i class="fa-solid fa-house-chimney"></i> Hostel & Faculty</h2>
+    <div class="card">
+      <i class="fa-solid fa-person-dress"></i>
+      Warden (Ms. Kavita): <a href="tel:7000011111"><strong>7000011111</strong></a>
+    </div>
+    <div class="card">
+      <i class="fa-solid fa-chalkboard-user"></i>
+      Teacher Incharge (Ms. Priya): <a href="tel:9898989898"><strong>9898989898</strong></a>
+    </div>
+
+    <h2><i class="fa-solid fa-people-group"></i> Volunteer Students</h2>
+    <div class="card">
+      <i class="fa-solid fa-user-graduate"></i>
+      Anjali (Class Representative): <a href="tel:7012345678"><strong>7012345678</strong></a>
+      
+    </div>
+<div class="contact-list">
+  <ul>
+<li>👩‍👩‍👧 <span>Women Helpline</span> <a href="tel:1091">Call</a></li>
+  <li>🚌 <span>Local Transport Support</span> <a href="tel:0123456789">Call</a></li>
+  </ul>
+  </div>
+    <div class="emergency-buttons">
+      <a href="chat.html" class="btn"><i class="fa-solid fa-comments"></i> Help Chat</a>
+      <a href="help.html" class="btn"><i class="fa-solid fa-clipboard"></i> Submit Help Form</a>
+    </div>
+
+  </div>
+
+  <script>
+    // Get DOM elements
+    const hamburger = document.getElementById('hamburger');
+    const navbar = document.getElementById('navbar');
+
+    // Toggle mobile menu
+    hamburger.addEventListener('click', () => {
+      navbar.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navbar.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>

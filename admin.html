@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shevaara Admin Panel</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+    }
+    .sidebar {
+      width: 240px;
+      background: #880E4F;
+      color: #fff;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 10px;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 15px;
+      display: block;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: #ad1457;
+    }
+    .main {
+      margin-left: 240px;
+      padding: 20px;
+      flex: 1;
+      overflow-y: auto;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .card h3 {
+      margin-top: 0;
+    }
+    .chat-box {
+      border: 1px solid #ddd;
+      height: 250px;
+      padding: 10px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      background: #fafafa;
+      display: flex;
+      flex-direction: column;
+    }
+    .message {
+      margin: 8px 0;
+      padding: 8px 12px;
+      border-radius: 6px;
+      max-width: 70%;
+    }
+    .user {
+      background: #e1bee7;
+      align-self: flex-start;
+    }
+    .admin {
+      background: #c5e1a5;
+      align-self: flex-end;
+    }
+    .input-box {
+      display: flex;
+      gap: 10px;
+    }
+    .input-box input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .input-box button {
+      background: #880E4F;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .input-box button:hover {
+      background: #ad1457;
+    }
+    .stats {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .stat-card {
+      flex: 1;
+      min-width: 200px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-card h2 {
+      margin: 0;
+      font-size: 28px;
+      color: #880E4F;
+    }
+    .stat-card p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      color: #555;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Shevaara Admin</h2>
+    <a class="active" data-section="dashboard">Dashboard</a>
+    <a data-section="chats">Chats</a>
+    <a data-section="sos">SOS Alerts</a>
+    <a data-section="health">Health Requests</a>
+    <a data-section="reports">Reports</a>
+    <a data-section="issues">User Issues</a>
+    <a data-section="settings">Settings</a>
+  </div>
+
+  <div class="main">
+    <!-- Dashboard Section -->
+    <div id="dashboard" class="section active">
+      <div class="stats">
+        <div class="stat-card">
+          <h2>12</h2>
+          <p>Chats Handled Today</p>
+        </div>
+        <div class="stat-card">
+          <h2>3</h2>
+          <p>SOS Alerts</p>
+        </div>
+        <div class="stat-card">
+          <h2>7</h2>
+          <p>Health Requests</p>
+        </div>
+        <div class="stat-card">
+          <h2>2</h2>
+          <p>User Reports</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chats Section -->
+    <div id="chats" class="section">
+      <div class="card">
+        <h3>Anonymous Chat - User12345</h3>
+        <div class="chat-box" id="chatBox">
+          <div class="message user">I feel unsafe walking back to hostel.</div>
+          <div class="message admin">Don’t worry, please use SOS if you need urgent help. Stay on the main road with lights.</div>
+        </div>
+        <div class="input-box">
+          <input type="text" id="adminMsg" placeholder="Type your reply...">
+          <button onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOS Alerts Section -->
+    <div id="sos" class="section">
+      <div class="card">
+        <h3>SOS Alerts 🚨</h3>
+        <ul>
+          <li><strong>User78901:</strong> Pressed SOS near Hostel Gate</li>
+          <li><strong>User65432:</strong> SOS triggered near Library</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Health Section -->
+    <div id="health" class="section">
+      <div class="card">
+        <h3>Health & Wellness Requests</h3>
+        <p><strong>User24680:</strong> “I need advice on period cramps.”</p>
+        <p><strong>User13579:</strong> “I’m feeling stressed, need guidance.”</p>
+      </div>
+    </div>
+
+    <!-- Issues Section -->
+    <div id="issues" class="section">
+      <div class="card">
+        <h3>User Issues & Complaints</h3>
+        <p><strong>User54321:</strong> “There is no street light near Hostel B.”</p>
+        <p><strong>User09876:</strong> “Boys loitering near Girls Hostel gate.”</p>
+      </div>
+    </div>
+
+    <!-- Reports Section -->
+    <div id="reports" class="section">
+      <div class="card">
+        <h3>Reports Overview</h3>
+        <p>Daily: 12 chats | 3 SOS | 7 Health | 2 Complaints</p>
+        <p>Weekly: 80 chats | 15 SOS | 40 Health | 12 Complaints</p>
+      </div>
+    </div>
+
+    <!-- Settings Section -->
+    <div id="settings" class="section">
+      <div class="card">
+        <h3>Settings</h3>
+        <p>Manage admin preferences and account settings here.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sidebar navigation logic
+    document.querySelectorAll(".sidebar a").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+
+        // Remove active state from all
+        document.querySelectorAll(".sidebar a").forEach(l => l.classList.remove("active"));
+        document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+
+        // Activate clicked
+        link.classList.add("active");
+        const sectionId = link.getAttribute("data-section");
+        document.getElementById(sectionId).classList.add("active");
+      });
+    });
+
+    // Chat functionality
+    function sendMessage() {
+      const input = document.getElementById("adminMsg");
+      const chatBox = document.getElementById("chatBox");
+      if (input && input.value.trim() !== "") {
+        const newMsg = document.createElement("div");
+        newMsg.className = "message admin";
+        newMsg.textContent = input.value;
+        chatBox.appendChild(newMsg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+        input.value = "";
+      }
+    }
+
+    // Enter key support for chat
+    const chatInput = document.getElementById("adminMsg");
+    if (chatInput) {
+      chatInput.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+          sendMessage();
+        }
+      });
+    }
+  </script>
+</body>
+</html>
